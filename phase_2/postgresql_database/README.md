@@ -1,18 +1,23 @@
 # PostgreSQL Relational Query Demo
 
-A simple PostgreSQL database project featuring a 3-table schema, sample seed data, and relational SQL queries and joins in separate files.
+A simple PostgreSQL database project featuring a 3-table `schema.sql`, sample `seed.sql` data, and relational SQL `queries.sql` and joins in separate files.
 
 ## How to Run
 
 1. **Create the database** in PostgreSQL (pgAdmin or terminal):
+
    ```sql
-   CREATE DATABASE my_database;
+   CREATE DATABASE blog_project;
+2. Run the schema.
+3. Run and seed the sample data.
+4. Query the database.
 
-2. **Run the schema** in public
+## Tech Stack
 
-3. **Run and seed the sample data**
+**Database:** Postgresql
 
-4. **Query the database**
+## Lessons Learnt
 
-## Tech
-**Postgresql pgAdmin**
+- How to setup postgresql on windows.
+- Creating a managing databases in postgresql.
+- Querying, using aggregate functions and making multi-table joins in postgresql.
