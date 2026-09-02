@@ -32,7 +32,7 @@ def home():
 
 @app.route("/about")
 def about():
-    return render_template("about.html")
+    return render_template("about.html", title="About")
 
 
 # if run directly changes will show and pages only need to be refreshed.
