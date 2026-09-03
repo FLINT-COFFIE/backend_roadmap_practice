@@ -64,6 +64,7 @@ class User(Resource):
 
     @marshal_with(userFields)
     def patch(self, id):
+        args = user_args.parse_args()
         user = UserModel.query.filter_by(id=id).first()
         if not user:
             abort(404, "User not found")
