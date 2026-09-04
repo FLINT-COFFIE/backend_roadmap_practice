@@ -1,8 +1,8 @@
-from flask import Flask, request, jsonify
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-books = [
+books_list = [
     {
         "id": 1,
         "title": "Things Fall Apart",
@@ -34,3 +34,15 @@ books = [
         "language": "Russian",
     },
 ]
+
+
+# create and read route for books
+@app.route("/books", methods=["GET", "POST"])
+# view function
+def books():
+    if request.method == "GET":
+        if len(books_list) > 0:
+            # returning the books as a response
+            return jsonify(books_list)
+        else:
+            "Nothing Found", 404  # error code
