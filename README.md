@@ -6,7 +6,7 @@ Hands-on projects tracking my progress through a self-guided backend engineering
 
 - [x] Phase 0 - 1 — Python OOP & git fundamentals
 - [x] Phase 2 — SQL & PostgreSQL schema design
-- [ ] Phase 3 — REST API with Flask
+- [x] Phase 3 — REST API with Flask
 - [ ] Phase 4 — FastAPI + SQLAlchemy + PostgreSQL
 - [ ] Phase 5 — Authentication
 - [ ] Phase 6 — Testing
