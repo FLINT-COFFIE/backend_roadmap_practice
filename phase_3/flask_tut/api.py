@@ -39,7 +39,7 @@ books_list = [
 # default route
 @app.route("/")
 def home():
-    return "Welcome"
+    return "<h1>FLASK BOOK API</h1>"
 
 
 # create and read route for books
@@ -56,9 +56,10 @@ def books():
 
     # creating a new book
     if request.method == "POST":
-        new_author = request.form["author"]
-        new_lang = request.form["language"]
-        new_title = request.form["title"]
+        data = request.get_json()
+        new_author = data["author"]
+        new_lang = data["language"]
+        new_title = data["title"]
         new_id = books_list[-1]["id"] + 1
 
         new_book = {
@@ -82,14 +83,16 @@ def single_book(id):
             if book["id"] == id:
                 # returning the books as a response
                 return jsonify(book)
+        return jsonify({"error": "Book not found"}), 404
 
     # updating the table
     if request.method == "PUT":
         for book in books_list:
             if book["id"] == id:
-                book["author"] = request.form["author"]
-                book["language"] = request.form["language"]
-                book["title"] = request.form["title"]
+                data = request.get_json()
+                book["author"] = data["author"]
+                book["language"] = data["language"]
+                book["title"] = data["title"]
 
                 # updating books list
                 updated_book = {
