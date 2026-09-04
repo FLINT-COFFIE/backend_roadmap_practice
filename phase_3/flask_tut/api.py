@@ -72,5 +72,41 @@ def books():
         return jsonify(books_list), 201  # success code
 
 
+# reading single books
+# adding update and delete
+@app.route("/books/<int:id>", methods=["GET", "PUT", "DELETE"])
+def single_book(id):
+    # reading the books
+    if request.method == "GET":
+        for book in books_list:
+            if book["id"] == id:
+                # returning the books as a response
+                return jsonify(book)
+
+    # updating the table
+    if request.method == "PUT":
+        for book in books_list:
+            if book["id"] == id:
+                book["author"] = request.form["author"]
+                book["language"] = request.form["language"]
+                book["title"] = request.form["title"]
+
+                # updating books list
+                updated_book = {
+                    "id": id,
+                    "author": book["author"],
+                    "language": book["language"],
+                    "title": book["title"],
+                }
+                return jsonify(updated_book)
+
+    # deleting books
+    if request.method == "DELETE":
+        for index, book in enumerate(books_list):
+            if book["id"] == id:
+                books_list.pop(index)
+                return jsonify(books_list)
+
+
 if __name__ == "__main__":
     app.run(debug=True)
