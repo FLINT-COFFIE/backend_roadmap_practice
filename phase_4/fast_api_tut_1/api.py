@@ -1,5 +1,5 @@
 # importing FastAPI
-from fastapi import FastAPI
+from fastapi import FastAPI, Path
 
 # creating an instance of FastAPI
 app = FastAPI()
@@ -16,5 +16,7 @@ def home():
 
 # making the path to return students
 @app.get("/get-student/{student_id}")
-def get_student(student_id: int):
+def get_student(
+    student_id: int = Path(..., description="The ID of the student", gt=0, lt=3),
+):
     return students[student_id]
