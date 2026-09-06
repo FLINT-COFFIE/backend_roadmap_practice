@@ -28,7 +28,7 @@ def get_student_id(
 # Query parameter
 # getting by student name
 @app.get("/get-by-name")
-def get_student_name(name: Optional[str] = None):
+def get_student_name(*, name: Optional[str] = None, test: int):
     for student_id in students:
         if students[student_id]["name"] == name:
             return students[student_id]
