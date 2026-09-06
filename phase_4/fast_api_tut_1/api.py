@@ -17,6 +17,13 @@ class Student(BaseModel):
     year: str
 
 
+# defining the update model
+class UpdateStudent(BaseModel):
+    name: Optional[str] = None
+    age: Optional[int] = None
+    year: Optional[str] = None
+
+
 # making the api
 @app.get("/")
 def home():
@@ -49,4 +56,22 @@ def create_student(student_id: int, student: Student):
     if student_id in students:
         return {"Error": "Student exists"}
     students[student_id] = student
+    return students[student_id]
+
+
+# making a put method
+@app.put("/update-student")
+def update_student(student_id: int, student: UpdateStudent):
+    if student_id not in students:
+        return {"Error": "Student does not exists"}
+
+    if student.name != None:
+        students[student_id].name = student.name
+
+    if student.age != None:
+        students[student_id].age = student.age
+
+    if student.year != None:
+        students[student_id].year = student.year
+
     return students[student_id]
