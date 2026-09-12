@@ -1,6 +1,8 @@
 # Imports
 
-from fastapi import FastAPI
+from random import randrange
+
+from fastapi import FastAPI, HTTPException, status
 from pydantic import BaseModel
 
 # Instance of fastapi
@@ -13,6 +15,13 @@ class Post(BaseModel):
     content: str
     published: bool = True
     rating: int | None = None
+
+
+# finding one post
+def find_post(id):
+    for p in my_posts:
+        if p["id"] == id:
+            return p
 
 
 # saving posts in memory
@@ -48,10 +57,23 @@ def root():
 
 @app.get("/posts")
 def get_posts():
-    return {"data": "This is your posts"}
+    return {"data": my_posts}
+
+
+@app.get("/posts/{id}")
+def get_one_post(id: int):
+    post = find_post(id)
+    if not post:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"post with id {id} was not found",
+        )
+    return {"data": post}
 
 
 @app.post("/posts")
 def create_posts(post: Post):
-    print(post.title)
-    return {"data": "new post"}
+    post_dict = post.model_dump()
+    post_dict["id"] = randrange(0, 1000000000000)
+    my_posts.append(post_dict)
+    return {"data": post_dict}
